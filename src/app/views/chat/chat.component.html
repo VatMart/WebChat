@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="ks-page-content">
+    <div class="ks-page-content-body">
+      <div class="ks-messenger">
+
+        <div class="ks-discussions" >
+          <div class="ks-search">
+            <button mat-stroked-button (click)="openDialog()">Добавить комнату</button>
+          </div>
+          <div class="ks-body ks-scrollable jspScrollable" data-auto-height="" style="overflow-y: auto; overflow-x: hidden;">
+            <div class="jspContainer" style="width: 339px; height: 550px;">
+              <div class="jspPane" style="padding: 0px; top: 0px; width: 329px;">
+                <ul class="ks-items">
+                  <li style ="cursor: pointer" *ngFor="let room of rooms" class="ks-item " (click)="selectRoom(room)" [class.ks-active]="room === selectedRoom">
+                    <a>
+                      <span class="ks-group-amount">{{room.users.length}}</span>
+                      <div class="ks-body" >
+                        <div class="ks-name">
+                          {{room.name}}
+                          <span class="ks-datetime" *ngIf="lastMessagesInRooms.get(room.id) let lasts">
+                            {{lasts.sendingDate | date : "shortTime"}}
+                          </span>
+                        </div>
+                        <div class="ks-message">
+                          <img class="rounded-circle" height="18" *ngIf="lastMessagesInRooms.get(room.id) let lasts"
+                               [src]="formatImage(userImages.get(lasts.sender_id)) || 'https://www.missingdogsuk.co.uk/wp-content/plugins/wp-job-manager-resumes/assets/images/candidate.png'" alt="user image"
+                               width="18" alt="avatar"> {{lastMessagesInRooms.get(room.id)?.text ||'Нет сообщений в комнате'}}
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <app-message-list></app-message-list>
+
+        <app-user-info></app-user-info>
+      </div>
+    </div>
+  </div>
+</div>

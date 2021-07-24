@@ -1,0 +1,58 @@
+<div class="ks-messages ks-messenger__messages">
+  <div class="ks-header">
+    <div class="ks-description">
+      <div class="ks-name">{{activeRoom ? activeRoom.name : 'Имя комнаты'}}</div>
+      <div class="ks-amount">{{activeRoom ? activeRoom.users.length : 'Количество'}} участников</div>
+    </div>
+    <div *ngIf="activeRoom" class="ks-controls">
+      <button mat-icon-button (click)="openDialogMembers()">
+        <mat-icon>groups</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="ks-body ks-scrollable jspScrollable"
+       data-reduce-height=".ks-footer"
+       style="height: 480px; overflow-y: scroll; overflow-x: hidden; padding: 0px; width: 701px;"
+       tabindex="0" #scrollMe (scroll)="onScroll()">
+    <div class="jspContainer" style="width: 601px;">
+      <div class="jspPane" style="padding: 0px; top: 0px; width: 691px;">
+        <ul class="ks-items">
+          <li *ngIf="!activeRoom" class="ks-separator">Сообщения комнаты</li>
+          <li class="ks-item {{message.sender_id===currentUserId ? selfMessage: fromMessage}}" *ngFor="let message of messages ">
+           <span class="ks-avatar ks-offline">
+            <img class="rounded-circle" height="36"
+                 [src]="formatImage(userImages?.get(message.sender_id)) || 'https://www.missingdogsuk.co.uk/wp-content/plugins/wp-job-manager-resumes/assets/images/candidate.png'" alt="user image"
+                 width="36">
+            </span>
+            <div class="ks-body">
+              <div class="ks-header">
+                <span class="ks-name">{{messageService.getUserFromUserIdInRoom(activeRoom, message.sender_id) ? messageService.getUserFromUserIdInRoom(activeRoom, message.sender_id)?.nickname : ''}}</span>
+                <span class="ks-datetime">{{message.sendingDate | date:'short'}}</span>
+              </div>
+              <div class="ks-message">{{message.text}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="jspVerticalBar">
+        <div class="jspCap jspCapTop"></div>
+        <div class="jspTrack" style="height: 390px;">
+          <div class="jspDrag" style="height: 206px;">
+            <div class="jspDragTop"></div>
+            <div class="jspDragBottom"></div>
+          </div>
+        </div>
+        <div class="jspCap jspCapBottom"></div>
+      </div>
+    </div>
+  </div>
+  <div class="ks-footer">
+    <mat-form-field class="form-control" hintLabel="Как ваши дела?" >
+        <mat-label>Текст сообщения</mat-label>
+        <textarea [disabled]="!activeRoom"  [cdkTextareaAutosize]="true" [matTextareaAutosize]="false" matInput [(ngModel)]="newMessageText"></textarea>
+    </mat-form-field>
+    <div class="ks-controls">
+      <button mat-raised-button [disabled]="!activeRoom" class="btn btn-primary" (click)="sendMessage()">Отправить</button>
+    </div>
+  </div>
+</div>

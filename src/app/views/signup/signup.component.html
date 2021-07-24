@@ -1,0 +1,40 @@
+<meta charset="utf-8">
+<div class="register-page">
+  <h2>Регистрация</h2>
+  <p>Уже есть аккаунт? <a routerLink="/signin">Вход</a></p>
+  <form [formGroup]="registerForm">
+    <div class="justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Логин</mat-label>
+        <input formControlName="login"
+               matInput>
+      </mat-form-field>
+    </div>
+    <div class="justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Никнейм</mat-label>
+        <input formControlName="nickname"
+               matInput>
+      </mat-form-field>
+    </div>
+    <div class="justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Пароль</mat-label>
+        <input formControlName="password" matInput
+               type="password">
+      </mat-form-field>
+    </div>
+    <div class="justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Подтвердите пароль</mat-label>
+        <input formControlName="confirmPassword" matInput
+               type="password">
+      </mat-form-field>
+    </div>
+
+    <button (click)="submit()" [disabled]="registerForm.invalid" color="primary" mat-flat-button>
+      Зарегистрировать
+    </button>
+
+  </form>
+</div>

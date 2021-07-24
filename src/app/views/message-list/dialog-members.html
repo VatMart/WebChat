@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Настройки комнаты {{data.room.name}}</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-list>Пользователи:
+    <mat-list-item *ngFor="let user of data.users">
+      <mat-icon>face</mat-icon>Имя:&nbsp;<b>{{user.nickname}}</b>
+      <button mat-icon-button [disabled]="true" style="position: absolute; right: 20px">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <mat-form-field hintLabel="Добавить пользователя">
+        <mat-label>Никнейм пользователя</mat-label>
+        <input matInput [(ngModel)]="nickname">
+      </mat-form-field>
+      <span>
+        <button mat-raised-button class="add-user-button" (click)="addUser()">
+          <mat-icon>add_circle_outline</mat-icon>
+          Добавить
+        </button>
+      </span>
+    </mat-list-item>
+  </mat-list>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button class="close-button" [mat-dialog-close]>Закрыть</button>
+</mat-dialog-actions>

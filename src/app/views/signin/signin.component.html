@@ -1,0 +1,31 @@
+<div class="login-page">
+  <h2>Вход</h2>
+  <div style="margin: 10px">
+    Еще нет аккаунта? <a routerLink="/signup">Зарегистрируйтесь</a>
+  </div>
+  <form [formGroup]="loginForm">
+    <div>
+      <div class="justify-content-center">
+        <div></div>
+        <mat-form-field appearance="outline">
+          <mat-label>Логин</mat-label>
+          <input formControlName="login"
+                 matInput>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Пароль</mat-label>
+          <input formControlName="password" matInput
+                 type="password">
+        </mat-form-field>
+      </div>
+
+      <div class="row" id="controls">
+        <button (click)="submit()" [disabled]="loginForm.invalid" color="primary" mat-flat-button style="width: 20%">
+          Вход
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

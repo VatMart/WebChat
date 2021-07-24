@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Добавить комнату</h2>
+<form class="example-form">
+  <mat-form-field hintLabel="От 3 до 40 символов">
+    <mat-label>Название комнаты</mat-label>
+    <label>
+      <input #input maxlength="40" minlength="3" type="text" matInput [formControl]="nameRoomFormControl"
+             placeholder="{{user.nickname}}-Room">
+    </label>
+    <mat-hint align="end">{{input.value?.length || 0}}/40</mat-hint>
+  </mat-form-field>
+</form>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-button mat-dialog-close (click)="onCreateRoom()" >Добавить</button>
+</div>
+
